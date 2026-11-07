@@ -4,6 +4,8 @@ A front-end prototype for SCM / PMO that tracks every purchase-requisition (PR) 
 
 > **All data is sample data.** Nothing connects to SAP, email, WhatsApp or carrier APIs. Every action that would normally go out to another system is labelled "Logged (simulated)" or "Draft copied".
 
+**Live demo:** https://manasbaishya.github.io/procurement-control-tower/ (GitHub Pages, no sign-in)
+
 ## How to open it
 
 - **Double-click `index.html`.** It runs from `file://` with no server, build step or install.
