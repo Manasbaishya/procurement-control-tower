@@ -1,0 +1,20 @@
+/* Small custom CSS only – Tailwind (Play CDN) does the rest. */
+html, body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body { background: #f1f5f9; }
+.sidebar.open { transform: translateX(0); }
+/* let wide tables scroll inside their card instead of stretching grid columns / the page */
+#app-viewport .grid > *, #app-viewport section { min-width: 0; }
+.sidebar nav::-webkit-scrollbar { width: 6px; }
+.sidebar nav::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+.toast { transition: opacity .35s ease; }
+.drawer-panel { animation: drawer-in .18s ease-out; }
+.modal-panel { animation: modal-in .15s ease-out; }
+@keyframes drawer-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes modal-in { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+table th { position: sticky; top: 0; z-index: 1; }
+.chart-tooltip { position: absolute; pointer-events: none; z-index: 5; min-width: 160px; }
+.heat-cell { min-width: 64px; }
+.tour-card { box-shadow: 0 20px 50px -12px rgba(15, 23, 42, .35); }
+.tour-highlight { outline: 3px solid #2563eb; outline-offset: 3px; border-radius: 10px; }
+svg text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+@media print { #sidebar, #topbar, #toast-root { display: none !important; } }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Procurement Control Tower · Tata Electronics</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased">
+  <div id="shell" class="flex min-h-screen">
+    <!-- Sidebar (off-canvas below lg) -->
+    <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col bg-slate-900 text-slate-300 transition-transform lg:static lg:translate-x-0" aria-label="Main navigation"></aside>
+    <div id="sidebar-backdrop" class="fixed inset-0 z-30 hidden bg-slate-900/40 lg:hidden" onclick="toggleSidebar(false)"></div>
+
+    <div class="flex min-w-0 flex-1 flex-col">
+      <header id="topbar" class="sticky top-0 z-20 flex flex-wrap items-center gap-2 border-b border-slate-200 bg-white/95 px-4 py-2.5 backdrop-blur lg:px-6">
+        <button type="button" class="rounded-lg border border-slate-300 p-1.5 lg:hidden" onclick="toggleSidebar(true)" aria-label="Open menu"><i data-lucide="menu" class="h-4 w-4"></i></button>
+        <div class="min-w-0">
+          <div class="truncate text-sm font-semibold text-slate-900">Procurement Control Tower</div>
+          <div class="truncate text-xs text-slate-500">Tata Electronics · Jagi Road, Assam · Inbound hub Guwahati (GAU)</div>
+        </div>
+        <span class="proto-tag inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-500"><i data-lucide="flask-conical" class="h-3 w-3"></i>Prototype · sample data</span>
+        <div class="ml-auto flex w-full flex-wrap items-center justify-end gap-2 sm:w-auto">
+          <button type="button" id="tour-btn" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50" onclick="startTour()"><i data-lucide="play" class="h-4 w-4"></i><span class="hidden sm:inline">Demo tour</span></button>
+          <button type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50" onclick="downloadHtml()"><i data-lucide="download" class="h-4 w-4"></i><span class="hidden sm:inline">Download HTML</span></button>
+          <label class="flex items-center gap-1.5 text-xs text-slate-500" for="role-select">Role
+            <select id="role-select" class="rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm text-slate-800" onchange="switchRole(this.value)">
+              <option>Buyer</option><option>Requester</option><option>Proc Ops</option><option>PMO Admin</option>
+            </select>
+          </label>
+          <div id="user-chip" class="hidden items-center gap-2 rounded-lg bg-slate-100 px-2.5 py-1.5 text-sm md:flex"></div>
+        </div>
+      </header>
+      <main id="app-viewport" class="mx-auto w-full max-w-[1600px] flex-1 p-4 lg:p-6" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div id="drawer-root"></div>
+  <div id="modal-root"></div>
+  <div id="tour-root"></div>
+  <div id="toast-root" class="pointer-events-none fixed bottom-4 right-4 z-[80] flex w-80 max-w-[calc(100vw-2rem)] flex-col gap-2" aria-live="polite"></div>
+
+  <!-- classic scripts, loaded in order (no ES modules so file:// works) -->
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/modals/core.js"></script>
+  <script src="js/modals/line-drawer.js"></script>
+  <script src="js/modals/thread-drawer.js"></script>
+  <script src="js/modals/reassign.js"></script>
+  <script src="js/modals/bulk-backup.js"></script>
+  <script src="js/modals/auto-allocate.js"></script>
+  <script src="js/modals/tracking.js"></script>
+  <script src="js/modals/followup-log.js"></script>
+  <script src="js/modals/awb-reminder.js"></script>
+  <script src="js/modals/tracking-import.js"></script>
+  <script src="js/modals/vendor-email.js"></script>
+  <script src="js/screens/home.js"></script>
+  <script src="js/screens/work-allocation.js"></script>
+  <script src="js/screens/work-queue.js"></script>
+  <script src="js/screens/all-requests.js"></script>
+  <script src="js/screens/new-request.js"></script>
+  <script src="js/screens/bulk-upload.js"></script>
+  <script src="js/screens/user-pending.js"></script>
+  <script src="js/screens/user-response.js"></script>
+  <script src="js/screens/vendor-outreach.js"></script>
+  <script src="js/screens/po-ops.js"></script>
+  <script src="js/screens/delivery-followup.js"></script>
+  <script src="js/screens/grn.js"></script>
+  <script src="js/screens/analytics.js"></script>
+  <script src="js/screens/exec-stats.js"></script>
+  <script src="js/screens/reports.js"></script>
+  <script src="js/screens/master-data.js"></script>
+  <script src="js/screens/settings.js"></script>
+  <script src="js/router.js"></script>
+</body>
+</html>
