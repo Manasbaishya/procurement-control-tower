@@ -34,6 +34,24 @@ New work goes to the least-loaded buyer in the category's pool, skipping anyone 
 - **Buyer queries** are assigned automatically to both the requester and the PR creator. A pre-PO line moves to *Info required*. When either of them replies (in the User Response Portal or on the thread), the ticket moves to *Vendor outreach* automatically.
 - **My Work Queue** shows a vendor history for each line's material: the last 5–10 purchases with vendor ID, vendor name, contact, e-mail, phone, unit price and lead time.
 
+## Exec Stats → ARC Recommendations
+
+A second tab in **Exec Stats** (PMO Admin role) that recommends items for a new Annual Rate Contract and flags existing ARCs that need action.
+
+- **Data.** Sample data loads by default: about 300 PO lines, 40 items, 16 vendors, 12 months and 10 ARCs. **Upload PO Data** and **Upload ARC Master** accept CSV or XLSX and are read in the browser only. **Column templates** downloads the expected headers. Header matching ignores case, spaces and underscores. Dates can be `YYYY-MM-DD`, `DD-MM-YYYY`, `DD/MM/YYYY`, `7-Nov-2026` or Excel dates.
+- **New ARC candidates.**
+  - Items are grouped by Item_Code, or by the normalised description when there is no code. Items on an active ARC are excluded.
+  - An item is eligible if it has at least 4 POs and at least ₹5,00,000 of spend in the last 12 months.
+  - Score (0–100), with each factor scaled across the eligible items: spend 30%, frequency 25%, rate variance 20%, demand stability 15%, vendor spread 10%.
+  - Estimated saving = (average rate − lowest rate) × annual quantity. Effort saved = POs × 6 hours. Proposed committed quantity = annual quantity × 0.85.
+- **ARC health.**
+  - Expired: Valid_To is in the past.
+  - Renew/Extend: at least 80% consumed, by quantity or value.
+  - Expiring: Valid_To is within 60 days.
+  - Under-utilised: more than 50% of the validity period has passed but less than 20% is consumed.
+- **Tuning.** Every threshold and weight is in `ARC_CONFIG` at the top of `js/arc-recommendations.js`. That file has no UI code. `arcAnalyse(poRows, arcRows, today)` can later take an SAP or Ariba extract unchanged.
+- **Excel.** Reading and writing .xlsx uses SheetJS, which loads from cdnjs the first time you use it. Offline, Export falls back to CSV, and you need to upload CSV instead of XLSX.
+
 ## Folder layout
 
 ```
@@ -41,6 +59,7 @@ index.html            shell: sidebar, top bar, #app-viewport, drawer / modal / t
 css/app.css           small custom CSS (Tailwind does the rest)
 js/data.js            masters (stages, buyers, categories, vendors, carriers) + seeded generators
 js/state.js           appState and helpers (formatCurrency, showToast, getFollowUpLines, SLA calc, CSV)
+js/arc-recommendations.js  ARC engine + ARC_CONFIG + sample ARC data (pure logic, no DOM)
 js/router.js          NAV_ITEMS, renderSidebar(), renderApp() hash router, role switch, tour, download
 js/screens/*.js       one file per screen, each exposes renderXxxScreen() (+ optional initXxx())
 js/modals/*.js        line drawer, thread drawer, reassign, bulk backup (OOO), auto-allocate,

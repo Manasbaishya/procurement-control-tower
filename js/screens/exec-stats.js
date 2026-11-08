@@ -345,7 +345,18 @@ function execDeliveryRisk(sc) {
 }
 
 /* ---------- screen ---------- */
+function execHeader() {
+  return pageHeader('Exec stats', 'Leadership view · Tata Electronics, Jagi Road · <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2 py-0.5 text-[11px] text-slate-500">' + icon('flask-conical', 'w-3 h-3') + 'Sample data</span>');
+}
+function execTabs() {
+  var t = appState.ui.execTab;
+  return '<div class="mb-4 flex gap-1 border-b border-slate-200" role="tablist">' + [['overview', 'Overview', 'gauge'], ['arc', 'ARC Recommendations', 'file-signature']].map(function (x) {
+    var on = t === x[0];
+    return '<button type="button" role="tab" aria-selected="' + on + '" class="-mb-px inline-flex items-center gap-1.5 border-b-2 px-3 py-2 text-sm font-medium ' + (on ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-800') + '" onclick="setExecTab(\'' + x[0] + '\')">' + icon(x[2], 'w-4 h-4') + x[1] + '</button>';
+  }).join('') + '</div>';
+}
 function renderExecStatsScreen() {
+  if (appState.ui.execTab === 'arc') return execHeader() + execTabs() + renderArcSection();
   var ui = appState.ui, sc = execScope(), k = execKpis(sc);
   var periodBtns = [3, 6, 12].map(function (p) {
     return '<button type="button" class="px-3 py-1.5 text-sm font-medium ' + (ui.execPeriod === p ? 'bg-blue-600 text-white' : 'bg-white text-slate-600 hover:bg-slate-50') + '" aria-pressed="' + (ui.execPeriod === p) + '" onclick="setExecPeriod(' + p + ')">' + p + 'M</button>';
@@ -382,7 +393,7 @@ function renderExecStatsScreen() {
       '<div class="mt-1 text-[11px] text-blue-700">Open in Delivery Follow-Up ' + icon('arrow-right', 'w-3 h-3 inline') + '</div></button>';
   }).join('') + '</div>';
 
-  return pageHeader('Exec stats', 'Leadership view · Tata Electronics, Jagi Road · <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2 py-0.5 text-[11px] text-slate-500">' + icon('flask-conical', 'w-3 h-3') + 'Sample data</span>') +
+  return execHeader() + execTabs() +
     filters + kpis +
     '<div class="grid gap-4 xl:grid-cols-5">' +
     execCard('spend', 'Spend by category, month on month', 'Top 7 categories + Other · hover for values', execLineChart(sc), execLineTable(sc), modeToggle, 'xl:col-span-3') +

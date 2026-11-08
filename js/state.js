@@ -17,6 +17,7 @@ var appState = Object.assign({
     poTab: 'expediting', poSearch: '', poStageFilter: '', poPage: 0, poCarrier: '', poMulti: [], portalSelected: '', queueSearch: '', queueDept: '',
     followRule: 'ALL',
     execPeriod: 6, execCategory: '', execBuyer: '', execMode: 'value', execVendorCategory: '', execTables: {}, execSort: { key: 'load', dir: -1 },
+    execTab: 'overview', arcSort: { key: 'rank', dir: 1 }, arcSearch: '', arcCategory: '', arcShowAll: false, arcHealthFilter: '',
     rebalanceFrom: '', rebalanceTo: '', rebalancePct: 20,
     newRequest: null, bulkResult: null
   }
